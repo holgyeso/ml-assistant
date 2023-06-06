@@ -1,0 +1,74 @@
+{% extends "ml_assistant/base.html" %}
+
+{% block custom_style %}
+<style>
+    .form-table-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+</style>
+{% endblock %}
+
+{% block menu-items %}
+<div>
+    <a href="/model-config" class="menu-button" style="margin-right: 3rem">
+        ≪ Back to model training
+    </a>
+</div>
+{% endblock %}
+
+{% block main %}
+<section>
+    {% if form %}
+
+    <h2 class="section-header--title">Input the values to predict the {{ target_column }}</h2>
+
+    <form action="" method="post"  class="model-form">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+            <input type="submit" value="Predict ≫">
+    </form>
+    {% endif %}
+
+    {% if pred is not None %}
+
+    <h2 class="section-header--title"><span>Predicted value for </span>{{ target_column }}: {{ pred|floatformat:2 }}</h2>
+
+    <a href="/predict" class="menu-button" style="margin: 5rem; display: inline-block;">
+        &#8634; Retake prediction
+    </a>
+
+    <div class="form-table-container">
+
+        <div class="form-table-container--header">
+            <p>Feature</p>
+        </div>
+        <div class="form-table-container--header">
+            <p>Input value</p>
+        </div>
+        <div class="form-table-container--header">
+            <p>Scaled value</p>
+        </div>
+        
+        {% for feature, value in input_values.items %}
+            <div class="form-table-container--field">
+                <p>{{ feature }}</p>
+            </div>
+            <div class="form-table-container--field">
+                <p>{{ value.real }}</p>
+            </div>
+            <div class="form-table-container--field">
+                <p>{{ value.scaled }}</p>
+            </div>
+        {% endfor %}
+    
+    </div>
+
+    {% endif %}
+</section>
+{% endblock %}

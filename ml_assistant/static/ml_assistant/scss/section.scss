@@ -1,0 +1,31 @@
+.section-header {
+
+    margin: 5rem 0rem 10rem 0rem;
+
+    &--title {
+        font-family: $highlight-font-family;
+        font-size: 6.5rem;
+        color: $main-highlight-color;
+
+        span {
+            color: $font-color;
+        }
+    }
+
+    &--subtitle {
+        font-size: 2.2rem;
+        margin: 1rem 0rem 2.5rem 0rem;
+        color: $main-highlight-text-color;
+    }
+
+    &--desc {
+        font-size: 1.9rem;
+        color: $medium-grey;
+        
+        span {
+            color: $main-highlight-text-color;
+            font-weight: 600;
+        }
+    }
+
+}

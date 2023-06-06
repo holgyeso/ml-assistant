@@ -1,0 +1,70 @@
+{% extends "ml_assistant/base.html" %}
+
+{% block menu-items %}
+    <ul class="menu-list">
+        <li> <a href="/details">Inspect data</a></li>
+        <li> <a href="/features">Feature details</a></li>
+        <li> <a href="/statistics" class="menu-list--current">Statistics</a></li>
+        <li> <a href="/missing">Missing values</a></li>
+    </ul>
+    <a href="/feature-config" class="menu-button">
+        Continue to prediction ≫
+    </a>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    <h2 class="section-header--title">
+        <span>Statistics about the dataset, that has </span> {{ nr_rows }} rows and {{ nr_cols }} features</h2>
+
+
+    {% if numerical %}
+
+    <h2 class="section-header--title">{{ numerical_col_nr_to_display }} Numerical columns</h2>
+
+    <div class="table-container"
+        style="grid-template-columns: repeat({{ numerical_col_nr }}, 1fr);
+               grid-template-rows: repeat({{ numerical_row_nr }}, 1fr);">
+
+        <div class="table-container--header"><p>Metric</p></div>
+        {% for header in numerical.columns %}
+            <div class="table-container--header"><p>{{ header }}</p></div>
+        {% endfor %}
+
+        {% for row in numerical.data %}
+            {% for col in row %}
+                <div class="table-container--field">
+                    <p>{{ col }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if categorical %}
+
+    <h2 class="section-header--title">{{ categorical_col_nr_to_display }} Categorical columns</h2>
+
+    <div class="table-container"
+        style="grid-template-columns: repeat({{ categorical_col_nr }}, 1fr);
+               grid-template-rows: repeat({{ categorical_row_nr }}, 1fr);">
+
+        <div class="table-container--header"><p>Metric</p></div>
+        {% for header in categorical.columns %}
+            <div class="table-container--header"><p>{{ header }}</p></div>
+        {% endfor %}
+
+        {% for row in categorical.data %}
+            {% for col in row %}
+                <div class="table-container--field">
+                    <p>{{ col }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</section>
+{% endblock %}

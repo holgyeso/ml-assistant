@@ -1,0 +1,60 @@
+{% extends "ml_assistant/base.html" %}
+
+{% block custom_style %}
+    <style>
+        .table-container {
+            grid-template-columns: repeat({{ nr_cols }}, 1fr);
+            grid-template-rows: repeat({{ nr_rows }}, 1fr);
+        }
+    </style>
+{% endblock %}
+
+{% block menu-items %}
+    <ul class="menu-list">
+        <li> <a href="/details" class="menu-list--current">Inspect data</a></li>
+        <li> <a href="/features">Feature details</a></li>
+        <li> <a href="/statistics">Statistics</a></li>
+        <li> <a href="/missing">Missing values</a></li>
+    </ul>
+    <a href="/feature-config" class="menu-button">
+        Continue to prediction ≫
+    </a>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    <p class="section-header--title">
+        The dataset contains <span>{{ nr_rows_total }} rows</span> and <span>{{ nr_cols }} columns</span>.
+    </p>
+
+    <form action="" method="post" class="inspect-data--form">
+        {% csrf_token %}
+        <p class="section-header--title">Inspect the
+            {{ form.order }}
+            {{ form.nr }}
+            rows from the dataset</p>
+        <input type="submit" value="≫">
+    </form>
+
+    {% if data_dict %}
+
+    <div class="table-container" >
+
+        {% for header in data_dict.columns %}
+            <div class="table-container--header"><p>{{ header }}</p></div>
+        {% endfor %}
+
+        {% for row in data_dict.data %}
+            {% for col in row %}
+            <div class="table-container--field">              
+                <p>{{ col }}</p>
+            </div>
+            {% endfor %}
+        {% endfor %}
+
+    </div>
+    {% endif %}
+
+</section>
+{% endblock %}

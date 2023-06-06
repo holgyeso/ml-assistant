@@ -1,0 +1,65 @@
+{% extends "ml_assistant/base.html" %}
+
+{% if data_dict %}
+    {% block custom_style %}
+        <style>
+            .table-container {
+                grid-template-columns: repeat({{ nr_cols }}, 1fr);
+                grid-template-rows: repeat({{ nr_rows }}, 1fr);
+            }
+        </style>
+    {% endblock %}
+{% endif %}
+
+{% block menu-items %}
+    <ul class="menu-list">
+        <li> <a href="/details">Inspect data</a></li>
+        <li> <a href="/features">Feature details</a></li>
+        <li> <a href="/statistics">Statistics</a></li>
+        <li> <a href="/missing" class="menu-list--current">Missing values</a></li>
+    </ul>
+    <a href="/feature-config" class="menu-button">
+        Continue to prediction ≫
+    </a>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    {% if missing_row_nr > 0 %}
+
+    <h2 class="section-header--title">
+        The dataset contains <span>{{ missing_row_nr }} rows</span> with missing values in any column <span>({{ missing_row_nr_pctg }} of all rows)</span></h2>
+
+        <form action="" method="post" class="drop-missing-data">        
+            {% csrf_token %}
+
+            <input type="submit" value="Delete these rows" name="delete_rows">
+            <input type="submit" value="Inspect these rows" name="inspect_rows">
+        </form>
+
+        {% if data_dict %}
+            <div class="table-container">
+
+                {% for header in data_dict.columns %}
+                    <div class="table-container--header"><p>{{ header }}</p></div>
+                {% endfor %}
+        
+                {% for row in data_dict.data %}
+                    {% for col in row %}
+                    <div class="table-container--field{% if col is None %}-error{% endif %}">
+                        <p>{{ col }}</p>
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+        
+            </div>
+        {% endif %}
+
+    {% else %}
+
+    <h2 class="section-header--title">There are no missing rows in the dataset!</h2>
+    {% endif %}
+
+</section>
+{% endblock %}

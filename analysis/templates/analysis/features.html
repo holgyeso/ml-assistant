@@ -1,0 +1,52 @@
+{% extends "ml_assistant/base.html" %}
+
+{% block custom_style %}
+    <style>
+        .table-container {
+            grid-template-columns: repeat({{ nr_cols }}, 1fr);
+            grid-template-rows: repeat({{ nr_rows }}, 1fr);
+        }
+    </style>
+{% endblock %}
+
+{% block menu-items %}
+    <ul class="menu-list">
+        <li> <a href="/details">Inspect data</a></li>
+        <li> <a href="/features" class="menu-list--current">Feature details</a></li>
+        <li> <a href="/statistics">Statistics</a></li>
+        <li> <a href="/missing">Missing values</a></li>
+    </ul>
+    <a href="/feature-config" class="menu-button">
+        Continue to prediction ≫
+    </a>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    <h2 class="section-header--title">Data types of the features</h2>
+
+    <div class="table-container">
+
+        <div class="table-container--header">
+            <p>Feature name</p>
+        </div>
+
+        <div class="table-container--header">
+            <p>dtype</p>
+        </div>
+
+        {% for col, type in dtypes.items %}
+        <div class="table-container--field">
+            <p>{{ col }}</p>
+        </div>
+        <div class="table-container--field">
+            <p>{{ type }}</p>
+        </div>
+        {% endfor %}
+
+        
+    </div>
+</section>
+
+{% endblock %}

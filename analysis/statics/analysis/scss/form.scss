@@ -1,0 +1,24 @@
+.drop-missing-data {
+    margin-top: 5rem;
+
+    input[type=submit] {
+        font-family: $font-family;
+        background-color: $main-highlight-color;
+        color: $background-color;
+        height: fit-content;
+        font-size: 1.8rem;
+        font-weight: 600;
+        padding: 1.5rem 3rem;
+        border-radius: 5px;
+        border: none;
+        margin: 2rem 3rem;
+
+        &:focus, &:active {
+            border: none;
+        }
+
+        &:hover {
+            animation: pulse-logo 1.5s infinite;
+        }
+    }
+}

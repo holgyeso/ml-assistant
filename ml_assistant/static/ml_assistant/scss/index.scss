@@ -1,0 +1,20 @@
+@import '_variables.scss';
+@import '_scaffolding.scss';
+@import 'header.scss';
+@import 'section.scss';
+@import 'footer.scss';
+@import 'messages.scss';
+
+@import 'features_included.scss';
+
+@import '../../../../csv_handler/static/csv_handler/scss/csv_form.scss';
+@import '../../../../analysis/statics/analysis/scss/inspect.scss';
+@import '../../../../analysis/statics/analysis/scss/table.scss';
+@import '../../../../analysis/statics/analysis/scss/form.scss';
+
+@import '../../../../prediction/static/prediction/scss/form.scss';
+
+
+
+
+// @import '../../../../prediction/static/prediction/scss/form.scss';

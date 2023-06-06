@@ -1,0 +1,40 @@
+.inspect-data--form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    input,
+        select {
+
+            font-family: inherit;
+            font-size: 5rem;
+            color: $main-highlight-color;
+            text-align: center;
+
+            border: none;
+
+            background-color: rgb($light-grey, 0.30);
+            padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+            margin-left: 2rem;
+
+            &::placeholder {
+                color: rgb($font-color, 0.25)
+            }
+
+            &:focus,
+            &:active {
+                border: none;
+                outline: none;
+                border-bottom-color: $main-highlight-color;
+                background-color: rgb($main-highlight-color, 0.05); 
+            }
+}
+    input:not([type=submit]) {
+        width: 20rem;
+    }
+
+    input[type=submit] {
+        margin-left: rem;
+    }
+}

@@ -1,0 +1,53 @@
+{% extends "ml_assistant/base.html" %}
+{% load static %}
+{% block menu-items %}
+<div>
+    <a href="/feature-config" class="menu-button">
+        ≪ Back to feature selection
+    </a>
+</div>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    <h2 class="section-header--title">Configure the model that will be trained</h2>
+
+    <div class="form--responses-container">
+
+        <div class="form--answers">
+            <div>
+                <p class="section-header--subtitle">Features included in the model and their encodings</p>
+                {% for feature, encoding in encodings.items %}
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                    <p>{{ feature }}: <span>{{ encoding }}</span></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div>
+            <p class="section-header--subtitle">Choose the model that should be trained</p>
+            <form action="" method="post" class="model-form">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+                <input type="submit" value="Train the model ≫">
+            </form>
+        </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'prediction/js/model_config.js' %}"></script>
+{% endblock %}

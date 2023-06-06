@@ -1,0 +1,30 @@
+{% extends "ml_assistant/base.html" %}
+{% load static %}
+
+{% block main %}
+
+<section>
+
+    <div class="csv-upload-form">
+
+        <img src="{% static 'csv_handler/images/robot.svg' %}" alt="">
+
+        <div class="csv-upload-form-content">
+            <div class="section-header">
+                <h2 class="section-header--title">Welcome to ML Assistant,</h2>
+                <p class="section-header--subtitle">the place where data management and model training are at 5 click
+                    distance!</p>
+            </div>
+            <form action="" method="post" class="csv_uploader" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <p class="section-header--subtitle">Upload your dataset in CSV format</p>
+                    {{ form.file }}
+                <input type="submit" value="Get started ≫">
+            </form>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

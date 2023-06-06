@@ -1,0 +1,75 @@
+.csv-upload-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10rem;
+    align-content: center;
+    justify-content: center;
+
+    img {
+        margin-left: 15rem;
+    }
+
+    &-content {
+        justify-self: center;
+        align-self: center;
+        
+    }
+}
+
+.csv_uploader {
+    border-radius: 20px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input[type=submit] {
+        background-color: $main-highlight-color;
+        color: $background-color;
+        padding: 1.5rem 3rem;
+        font-size: 2rem;
+        border: none;
+        border-radius: 10px;
+        font-family: inherit;
+        margin: 3rem 2rem 0rem 2rem;
+    }
+
+    input[type=submit]:hover {
+        animation: pulse-logo 1.5s infinite;
+    }
+
+    input[type=submit]:active, input[type=submit]:focus {
+        background-color: $main-highlight-color;
+    }
+
+
+    input {
+        padding: 2.5rem 5rem;
+        font-family: inherit;
+        border-radius: 7px;
+        margin: 1rem 0rem;
+        font-size: 1.8rem;
+        // background-color: rgb($light-grey, 0.2);
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+
+        &::file-selector-button {
+            font-family: inherit;
+            background-color: $background-color;
+            border: 1px solid $main-highlight-color;
+            padding: 1rem;
+            margin-right: 2rem;
+            border-radius: 5px;
+            color: $main-highlight-color;
+        }
+
+        &:focus,
+        &:active {
+            border-color: $main-highlight-color;
+            background-color: rgb($main-highlight-color, 0.05);
+            outline: none;
+        }
+    }
+}

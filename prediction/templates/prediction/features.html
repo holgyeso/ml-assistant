@@ -1,0 +1,78 @@
+{% extends "ml_assistant/base.html" %}
+
+{% load static %}
+
+{% block custom_style %}
+<style>
+    .form-table-container {
+        grid-template-columns: repeat({{nr_cols}}, 1fr);
+    }
+</style>
+{% endblock %}
+
+{% block menu-items %}
+<div>
+<a href="/details" class="menu-button" style="margin-right: 3rem">
+    ≪ Back to processing
+</a>
+<a href="/model-config" class="menu-button">
+    Train the model ≫
+</a>
+</div>
+{% endblock %}
+
+{% block main %}
+<section>
+
+    <h2 class="section-header--title">Configure which features to include in the model and the encoding of these</h2>
+    <p class="section-header--subtitle">Please include the target parameter as well!</p>
+
+    <form action="" method="post" class="feature-config-form" id="feature_form">
+
+        <div class="form-table-container">
+            {% csrf_token %}
+
+            <div class="form-table-container--header">
+                <p>Feature name</p>
+            </div>
+            <div class="form-table-container--header">
+                <p>Type of the feature</p>
+            </div>
+            <div class="form-table-container--header">
+                <p>Include it in the model?</p>
+            </div>
+            <div class="form-table-container--header">
+                <p>Which encoding should be used?</p>
+            </div>
+
+            {% for form in form_set%}
+            <div class="form-table-container--field">
+                <p>{{ form.field_name }}</p>
+            </div>
+            <div class="form-table-container--field">
+                <p>{{ form.dtype }}</p>
+            </div>
+            <div class="form-table-container--field">
+                {{ form.include }}
+                <label for="{{ form.include.auto_id }}">
+                  <span class="checkbox">
+                  </span>
+                </label>
+                
+            </div>
+            <div class="form-table-container--field">
+                <p>{{ form.normalize }}</p>
+                <div></div>
+            </div>
+            {% endfor %}
+            
+        </div>       
+            <label for="">
+            <ul class="messages" id="messages"></ul>
+            </label>
+            <input type="submit" value="Next ≫">
+    </form>
+</section>
+
+<script src="{% static 'prediction/js/ordinal_encoder.js' %}"></script>
+{% endblock %}
